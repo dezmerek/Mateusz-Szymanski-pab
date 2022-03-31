@@ -1,6 +1,7 @@
-import express from 'express'
+import express, { json } from 'express'
 import {Request, Response} from 'express'
 import fs from 'fs';
+import jwt from 'jsonwebtoken'
 
 var app = express();
 
@@ -15,25 +16,18 @@ class Notes {
         this.updateStorage()
     }
 
-    public readAllNotes(){
-        this.readStorage()
-        console.log(this.note);
-        
-        return this.note
-    }
-
     constructor(){
+        this.readFileWithPromise("./data/notes.json")     
+    }
+
+    public readFileWithPromise(file: string){
+        const data = fs.promises.readFile(file, 'utf8')
+        data.then((data)=>{
+            this.note = JSON.parse(data);
+        })
         
     }
 
-    private async readStorage(): Promise<void> {
-        try {
-            const data = await fs.promises.readFile("./data/notes.json", 'utf-8');            
-            this.note = JSON.parse(data)
-        } catch (err) {
-            console.log(err)
-        }
-    }
     private async updateStorage(): Promise<void> {
         try {
             await fs.promises.writeFile("./data/notes.json", JSON.stringify(this.note));
@@ -77,7 +71,6 @@ let notes = [
 ]
 
 
-
 app.post('/note',async function (req: Request, res: Response) {
     const notes = new Notes()
     notes.addNote(req.body)
@@ -105,24 +98,29 @@ app.post('/tag', function (req: Request, res: Response) {
 });
 
 app.get('/note/:id', async function (req: Request, res: Response) {
-    let data = JSON.parse(await fs.promises.readFile("./data/notes.json", 'utf-8'));
-    var id = parseInt(req.params.id);
-    data.forEach((element:any) => {
-        if(element.id === id){
-            res.status(200).send(element)
-        }
-    });
-    res.status(404).send()
+    const notes = new Notes()
+    setTimeout(() => {
+        
+        var id = parseInt(req.params.id);
+        notes.note.forEach((element:any) => {
+            if(element.id === id){
+                res.status(200).send(element)
+            }
+        });
+        res.status(404).send()
+    }, 100);
 });
 
 app.get('/notes', async function (req: Request, res: Response) {
     const notes = new Notes()
-    const data = notes.readAllNotes()
-    if(data.length >0 ){
-        res.status(200).send(data)
-    }else{
-        res.status(400).send("brak")
-    }
+    setTimeout(() => {
+        const data = notes.note
+        if(data.length >0 ){
+            res.status(200).send(data)
+        }else{
+            res.status(400).send("brak")
+        }
+    }, 100);
 });
 
 app.get('/tags', function (req: Request, res: Response) {
@@ -135,28 +133,66 @@ app.get('/tags', function (req: Request, res: Response) {
 
 app.put('/note/:id', function (req: Request, res: Response) {
     var id = parseInt(req.params.id);
-    for (const key in notes) {
-        if (Object.prototype.hasOwnProperty.call(notes, key)) {
-            const element = notes[key];
-            if(element.id === id){
-                notes[key] = new Note(req.body.id,req.body.title, req.body.content,new Date,[])
-                res.status(200).send(notes[key])
+    const notes = new Notes()
+    setTimeout(() => {
+        
+        for (const key in notes.note) {
+            if (Object.prototype.hasOwnProperty.call(notes.note, key)) {
+                const element = notes.note[key];
+                if(element.id === id){
+                    notes.note[key] = new Note(req.body.id,req.body.title, req.body.content,new Date,[])
+                    res.status(200).send(notes.note[key])
+                }
             }
         }
-    }
-    res.status(404).send()
-
+        res.status(404).send()
+    }, 100);
 });
 app.delete('/note/:id', function (req: Request, res: Response) {
     var id = parseInt(req.params.id);
-    for (let index = 0; index < notes.length; index++) {
-        const element = notes[index];
-        if(element.id === id){
-            notes.splice(index);
-            res.status(200).send()
+    const notes = new Notes()
+    setTimeout(() => {
+        
+        for (let index = 0; index < notes.note.length; index++) {
+            const element = notes.note[index];
+            if(element.id === id){
+                notes.note.splice(index);
+                res.status(200).send()
+            }
         }
-    }
-    res.status(400).send()
+        res.status(400).send()
+    }, 100);
 });
+
+const MainLogin = 123
+const MainPass = 123
+
+app.post("/login",function (req:Request,res:Response) {
+    
+    if(req.headers.authorization === undefined){
+        const login = req.body.login
+        const pass = req.body.pass
+        const notes = new Notes()
+        setTimeout(() => {
+            const com = {login:login,pass:pass,notes:notes.note}
+            const token = jwt.sign(JSON.stringify(com), "Bearer")
+            console.log(token);
+            res.status(400).send()
+        }, 100);
+    }else{
+        try {
+            const payload = jwt.verify(req.headers.authorization, "Bearer") as any
+            if(payload.login === MainLogin && payload.pass === MainPass){
+                res.status(200).send(payload)
+            }else{
+                res.status(400).send("Token nie jest poprawny")
+            }
+        } catch (error) {
+            res.status(400).send("Token nie jest poprawny")
+        }
+        
+    }
+    
+})
 
 app.listen(3000,()=> console.log("Uruchomiona na porcie 3000"))
