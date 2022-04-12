@@ -1,6 +1,6 @@
 import express, { json } from 'express'
 import {Request, Response} from 'express'
-import {User} from "../models/user"
+import {UserFile} from "../models/user"
 
 const router = express.Router()
 
@@ -10,10 +10,9 @@ router.use((req,res,next)=>{
 })
 
 router.post("/",function (req:Request,res:Response) {
-    const user = new User()
+    const user = new UserFile({})
     if(req.headers.authorization === undefined){
         const result = user.Login(req.body.login,req.body.password)
-        console.log(result);
         
         if(result){
             res.status(200).send("Zalogowano")
