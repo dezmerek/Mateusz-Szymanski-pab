@@ -1,7 +1,7 @@
 import express, { json } from 'express'
 import {Request, Response} from 'express'
 
-import {UserFile,DataStorage} from "../models/user";
+import {UserFile,User,DataStorage} from "../models/user";
 
 const router = express.Router()
 
@@ -11,9 +11,9 @@ router.use((req,res,next)=>{
 
 router.post('/', async (req, res) => {
     const config = await import('../config.json')
-    let user:DataStorage;
+    let user:any;
     if(config.UseDataBase){
-        user = new UserFile({Login:"123",Password:"123"})
+        user = new User({Login:"123",Password:"123"})
     }else{
         user = new UserFile({Login:"123",Password:"123"})
     }

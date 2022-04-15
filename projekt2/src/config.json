@@ -1,5 +1,6 @@
 {
     "UseDataBase":false,
     "FileDir": "./src/data/notes.json",
+    "UserDir": "./src/data/users.json",
     "DataString":""
 }
