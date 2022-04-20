@@ -104,7 +104,6 @@ app.delete('/note/:id', function(req: Request, res: Response){
   }
 })
 
-
 //TAGS.
 interface Tag {
   id?: number
