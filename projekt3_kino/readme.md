@@ -16,7 +16,11 @@ Aplikacja pozwala na zarządzanie personelem, magazynem produktów, salami kinow
 ## Modele danych
 
 Kino
-- xyz
+- nazwa
+- adres
+- telefon
+- nip
+- email
 
 ## Autor
 - [@Dezmerek](https://www.github.com/Dezmerek)
