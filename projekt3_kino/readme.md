@@ -22,6 +22,34 @@ Kino
 - nip
 - email
 
+Sala
+- nazwa
+- iloscMiejsc
+- status (wolny, zajęty, niedostępny)
+
+Pracownik
+- imie
+- nazwisko
+- stanowisko
+
+Produkt
+- nazwa
+- cena
+- ilosc
+
+Filmy
+- tytul
+- gatunek
+- produkcja
+- rokPremiery
+- rezyser
+- czasTrwania (minuty)
+- odLat
+
+Bilet
+- numer
+- ulga
+
 ## Autor
 - [@Dezmerek](https://www.github.com/Dezmerek)
 
