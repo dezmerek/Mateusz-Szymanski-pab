@@ -7,6 +7,7 @@
 Pracownik
 - imie
 - nazwisko
+- numerTelefonu
 - stanowisko
 
 Rezerwacja
@@ -19,7 +20,6 @@ Produkt
 - nazwa
 - cena
 - ilosc
-- jednostkaMiary
 
 Usluga
 - nazwa
