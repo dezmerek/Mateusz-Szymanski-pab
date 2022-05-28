@@ -1,54 +1,40 @@
-# Projekt Kino
-Aplikacja pozwala na zarządzanie personelem, magazynem produktów, salami kinowymi, biletami, filmami oraz generowaniem rapotów.
+# Projekt BarberShop
 
 ## Funkcjonalności
-1. Kino - dane kino
-2. Sala kinowa - lista miejsc wraz z statusem (wolny, zajęty).
-3. Pracownicy - lista pracowników
-4. Magazyn produktów - lista produktow na magazynie
-5. Menu - przekąski w menu 
-6. Filmy - lista filmów
-7. Bilety - rezerwacja
-
-- raport zamowień we wskazanym okresie czasu
-- raport przychodów we wskazanym okresie czasu
 
 ## Modele danych
-
-Kino
-- nazwa
-- adres
-- telefon
-- nip
-- email
-
-Sala
-- nazwa
-- iloscMiejsc
-- status (wolny, zajęty, niedostępny)
 
 Pracownik
 - imie
 - nazwisko
 - stanowisko
 
+Rezerwacja
+- pracownik?
+- start
+- koniec
+- klient
+
 Produkt
 - nazwa
 - cena
 - ilosc
+- jednostkaMiary
 
-Filmy
-- tytul
-- gatunek
-- produkcja
-- rokPremiery
-- rezyser
-- czasTrwania (minuty)
-- odLat
+Usluga
+- nazwa
+- cena
+- czas
 
-Bilet
-- numer
-- ulga
+Klient
+- imie
+- nazwisko
+- numerTelefonu
+
+Zamówienia
+- produkt
+- status
+- kwota
 
 ## Autor
 - [@Dezmerek](https://www.github.com/Dezmerek)
