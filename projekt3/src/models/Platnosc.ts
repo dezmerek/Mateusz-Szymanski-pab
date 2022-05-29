@@ -2,10 +2,10 @@ import mongoose from "mongoose";
 
 const PlatnoscSchema = new mongoose.Schema({
     platnoscOnline: {
-        type: Boolean,
+        type: String,
         required: true
     },
-    rodzajPlatnosci: {
+    metodaPlatnosci: {
         type: String,
         required: true
     }
