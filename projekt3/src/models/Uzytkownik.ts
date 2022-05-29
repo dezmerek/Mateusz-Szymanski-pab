@@ -9,7 +9,7 @@ const UzytkownikSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    jestAmin:{
+    jestAdmin:{
         type: Boolean,
         required: true,
         default: false
