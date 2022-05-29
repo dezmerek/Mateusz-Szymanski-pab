@@ -1,7 +1,6 @@
-import ProduktModel from "../models/Klient";
+import KlientModel from "../models/Klient";
 import {Request, Response} from 'express'
 import express from 'express';
-import KlientModel from "../models/Klient";
 
 const router = express.Router();
 const app = express()
