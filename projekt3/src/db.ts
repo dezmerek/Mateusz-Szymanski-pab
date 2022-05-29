@@ -1,14 +1,12 @@
-import { ChangeStreamDocument } from "mongodb";
-import mongoose from 'mongoose';
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+dotenv.config({
+    path: './src/routes/.env'
+});
 
-export const connect = async (): Promise<void> => {
 
-    // connection string
+export const connect = () => {
     console.log("Connecting to Mongo...")
-    const connString = 'mongodb+srv://admin:admin@barbershop.owobcns.mongodb.net/?retryWrites=true&w=majority'
-
-    // Przygotowanie komunikacji - połączenie z bazą danych
-    const db = await mongoose.connect(connString)
+    mongoose.connect(process.env.DB_CONNECT)
     console.log('Mongo Connected!')
-
-}
+ }

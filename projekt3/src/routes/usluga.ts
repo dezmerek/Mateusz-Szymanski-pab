@@ -1,13 +1,14 @@
 import UslugaModel from "../models/Usluga";
 import {Request, Response} from 'express'
 import express from 'express';
+import { jestAdmin, isAuth } from "./tokenVerify";
 
 const router = express.Router();
 const app = express()
 app.use(express.json())
 
 // DODAJ NOWA USLUGE
-router.post('/add', async (req: Request, res: Response)=>
+router.post('/add', isAuth, jestAdmin, async (req: Request, res: Response)=>
 {
     const nowaUsluga = new UslugaModel({
             nazwa: req.body.nazwa,

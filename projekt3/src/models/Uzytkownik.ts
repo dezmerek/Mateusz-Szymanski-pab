@@ -1,15 +1,15 @@
 import mongoose from "mongoose";
 
-const UserSchema = new mongoose.Schema({
+const UzytkownikSchema = new mongoose.Schema({
     login:{
         type: String,
         required: true,
         unique: true},
-    password:{
+    haslo:{
         type: String,
         required: true
     },
-    isAdmin:{
+    jestAmin:{
         type: Boolean,
         required: true,
         default: false
@@ -18,12 +18,13 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    phoneNumber:{
+    numerTelefonu:{
         type: String,
         required: true,
         length: 9
     }
 })
 
-const UserModel = mongoose.model("User", UserSchema);
-export default UserModel
+
+const UzytkownikModel = mongoose.model("Uzytkownik", UzytkownikSchema);
+export default UzytkownikModel
