@@ -1,23 +1,39 @@
 import mongoose from "mongoose";
 
 const RezerwacjaSchema = new mongoose.Schema({
-    pracownik: {
+    termin: {
+        type: Date,
+        required: false
+    },
+    usluga: {
+        required: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Usluga'
+    },
+    statusRezerwacji: {
+        required: true,
+        enum: ["zlozone", "wRealizacji", "zrealizowane", "rachunek"],
+        type: String
+    },
+    platnosc: {
         required: false,
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Pracownik'
-    },
-    start: {
-        type: Date,
-        required: true
-    },
-    koniec: {
-        type: Date,
-        required: true
+        ref: 'Platnosc'
     },
     klient: {
         required: true,
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Klient'
+        ref: 'Uzytkownik'
+    },
+    pracownik: {
+        required: false,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Uzytkownik'
+    },
+    uzytkownik:{
+        required: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Uzytkownik'
     }
 })
 

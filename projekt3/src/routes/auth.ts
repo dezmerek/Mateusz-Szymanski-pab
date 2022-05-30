@@ -48,7 +48,7 @@ router.post('/login',async (req:Request, res:Response) => {
 
 router.post('/register',async (req:Request, res:Response) => {
     try{
-        const {login, email, numerTelefonu, haslo: passwordBody} = req.body;
+        const {login, email, imie, nazwisko, numerTelefonu, haslo: passwordBody} = req.body;
 
         if(!login || !email || !numerTelefonu || !passwordBody)
            return res.status(400).json("Puste wartości.")
@@ -63,8 +63,10 @@ router.post('/register',async (req:Request, res:Response) => {
         const nowyUzytkownik = await new UzytkownikModel({
             login,
             haslo,
+            imie,
+            nazwisko,
             email,
-            numerTelefonu
+            numerTelefonu,
         }).save()
 
         return res.status(200).json(nowyUzytkownik)

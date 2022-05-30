@@ -7,6 +7,7 @@ const PlatnoscSchema = new mongoose.Schema({
     },
     metodaPlatnosci: {
         type: String,
+        enum: ["Karta debetowa/kredytowa", "Blik", "Gotowka"],
         required: true
     }
     })

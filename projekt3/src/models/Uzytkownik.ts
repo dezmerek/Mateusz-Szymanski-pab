@@ -9,14 +9,32 @@ const UzytkownikSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    imie:{
+        type: String,
+        required: true
+    },
+    nazwisko:{
+        type: String,
+        required: true
+    },
     jestAdmin:{
+        type: Boolean,
+        required: true,
+        default: false
+    },
+    klient:{
+        type: Boolean,
+        required: true,
+        default: true
+    },
+    pracownik:{
         type: Boolean,
         required: true,
         default: false
     },
     email:{
         type: String,
-        required: true
+        required: false
     },
     numerTelefonu:{
         type: String,
