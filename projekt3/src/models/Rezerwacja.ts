@@ -3,7 +3,11 @@ import mongoose from "mongoose";
 const RezerwacjaSchema = new mongoose.Schema({
     termin: {
         type: Date,
-        required: false
+        required: true
+    },
+    terminKoniec: {
+        type: Date,
+        required: true
     },
     usluga: {
         required: true,
@@ -12,13 +16,9 @@ const RezerwacjaSchema = new mongoose.Schema({
     },
     statusRezerwacji: {
         required: true,
-        enum: ["zlozone", "wRealizacji", "zrealizowane", "rachunek"],
+        enum: ["wRealizacji", "zrealizowane"],
+        default: 'wRealizacji',
         type: String
-    },
-    platnosc: {
-        required: false,
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Platnosc'
     },
     klient: {
         required: true,

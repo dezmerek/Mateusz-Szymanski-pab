@@ -135,3 +135,16 @@
 	"numerTelefonu": "444555999"
 }
  ```
+
+
+  **Przykładowe dane REZERWACJA:**
+   ```json
+  {
+    "termin": "2022-06-05T11:00:00.000Z",
+	"terminKoniec": "2022-06-05T12:00:00.000Z",
+	"usluga": "6294db4406612a15321427ea",
+	"statusRezerwacji": "wRealizacji",
+	"klient": "629545194506d846edb7f4d2",
+	"pracownik": "6295455d4506d846edb7f4d5"
+}
+ ```

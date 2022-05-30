@@ -10,13 +10,17 @@ const router = express.Router();
 const app = express()
 app.use(express.json())
 
-router.post('/', async (req:Request, res:Response) => {
+router.post('/add', async (req:Request, res:Response) => {
     const header = req.headers["authorization"]?.split(' ')[1];
     const uzytkownik = jwt.decode(header, process.env.secret)
     const wybranyUzytkownik = await UzytkownikModel.findOne({login: uzytkownik.login}).lean()
     const rezerwacja =  new RezerwacjaModel({
-        klient: req.body.klient,
+        termin: req.body.termin,
+        terminKoniec: req.body.terminKoniec,
         usluga: req.body.usluga,
+        statusRezerwacji: req.body.statusRezerwacji,
+        klient: req.body.klient,
+        pracownik: req.body.pracownik,
         uzytkownik: wybranyUzytkownik,
     })
     try{
@@ -46,7 +50,7 @@ router.post('/', async (req:Request, res:Response) => {
     }
 })
 
-router.delete('/:id', async (req:Request, res: Response) => {
+router.delete('/delete/:id', async (req:Request, res: Response) => {
     try{
         const header = req.headers["authorization"]?.split(' ')[1];
         const uzytkownik = jwt.decode(header, process.env.secret)
@@ -70,12 +74,12 @@ router.delete('/:id', async (req:Request, res: Response) => {
 router.get('/get',async (req:Request, res:Response) => {
     const header = req.headers["authorization"]?.split(' ')[1];
     const uzytkownik = jwt.decode(header, process.env.secret)
-    const rezerwacje = await RezerwacjaModel.find({user: uzytkownik.login}).populate('usluga').populate('uzytkownik').populate('platnosc')
+    const rezerwacje = await RezerwacjaModel.find({user: uzytkownik.login}).populate('termin').populate('terminKoniec').populate('usluga').populate('statusRezerwacji').populate('klient').populate('pracownik')
     return res.status(201).json(rezerwacje)
 })
 
 router.get('/getAll', isAuth, jestAdmin, async (req:Request, res:Response) => {
-    const rezerwacje = await RezerwacjaModel.find().populate('usluga').populate('uzytkownik').populate('platnosc')
+    const rezerwacje = await RezerwacjaModel.find().populate('termin').populate('terminKoniec').populate('usluga').populate('statusRezerwacji').populate('klient').populate('pracownik')
     return res.status(201).json(rezerwacje)
 })
 
