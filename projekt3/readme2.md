@@ -48,3 +48,90 @@
 	"cena": 70
 }
  ```
+
+
+ **Przykładowe dane PLATNOŚCI:**
+```json
+{
+    "platnoscOnline": true,
+	"metodaPlatnosci": "Karta debetowa/kredytowa"
+}
+ ```
+ ```json
+{
+    "platnoscOnline": true,
+	"metodaPlatnosci": "Blik"
+}
+ ```
+ ```json
+{
+    "platnoscOnline": false,
+	"metodaPlatnosci": "Gotowka"
+}
+ ```
+
+
+  **Przykładowe dane PLATNOŚCI:**
+```json
+ {
+    "nazwa": "American Crew Finishing Spray lakier do włosów 500 ml",
+	"cena": 79,
+	"ilosc": 8
+}
+ ```
+ ```json
+{
+    "nazwa": "American Crew Pomade pomada do stylizacji włosów 85 g",
+	"cena": 65,
+	"ilosc": 18
+}
+ ```
+ ```json
+{
+    "nazwa": "American Crew Prep & Prime Tonik do włosow 250 ml",
+	"cena": 56,
+	"ilosc": 14
+}
+ ```
+
+
+  **Przykładowe dane UŻYTKOWNIK:**
+ ```json
+ {
+    "login": "admin",
+	"haslo": "admin",
+	"imie": "Admin",
+	"nazwisko": "Administrator",
+	"jestAdmin": true,
+	"klient": false,
+	"pracownik": true,
+	"email": "admin@mail.com",
+	"numerTelefonu": "111555999"
+}
+ ```
+  ```json
+ {
+    "login": "adamNowak",
+	"haslo": "adam",
+	"imie": "Adam",
+	"nazwisko": "Nowak",
+	"jestAdmin": false,
+	"klient": true,
+	"pracownik": false,
+	"email": "adamnowak@mail.com",
+	"numerTelefonu": "444444111"
+}
+ ```
+   ```json
+ {
+    "login": "kamilKowalski",
+	"haslo": "kamil",
+	"imie": "Kamil",
+	"nazwisko": "Kowalski",
+	"jestAdmin": false,
+	"klient": true,
+	"pracownik": true,
+	"email": "kamilkowalski@mail.com",
+	"numerTelefonu": "444555999"
+}
+ ```
