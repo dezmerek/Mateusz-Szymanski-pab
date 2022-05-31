@@ -4,11 +4,11 @@ const ZamowieniaSchema = new mongoose.Schema({
     klient: {
         required: true,
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Klient'
+        ref: 'Uzytkownik'
     },
     produkt: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'produkt',
+        ref: 'Produkt',
         required: true
     },
     status: {

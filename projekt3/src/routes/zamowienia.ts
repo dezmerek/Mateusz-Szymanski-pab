@@ -69,7 +69,6 @@ router.delete('/delete/:id', async (req:Request, res: Response) => {
     }
 })
 
-
 router.get('/get',async (req:Request, res:Response) => {
     const header = req.headers["authorization"]?.split(' ')[1];
     const uzytkownik = jwt.decode(header, process.env.secret)
