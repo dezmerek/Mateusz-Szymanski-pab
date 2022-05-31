@@ -24,7 +24,7 @@ router.post('/add', async (req:Request, res:Response) => {
         uzytkownik: wybranyUzytkownik,
     })
     try{
-        const wybranaUsluga = await UslugaModel.findOne(rezerwacja.travel)
+        const wybranaUsluga = await UslugaModel.findOne(rezerwacja.usluga)
         console.log(wybranaUsluga.isAvailable)
 
         if(wybranaUsluga.isAvailable == false)

@@ -148,3 +148,13 @@
 	"pracownik": "6295455d4506d846edb7f4d5"
 }
  ```
+
+  **Przykładowe dane ZAMOWIENIE:**
+  ```json
+   {
+    "klient": "629545194506d846edb7f4d2",
+	"produkt": "62952ec807e323a3fc4fba88",
+	"status": "zlozone",
+	"kwota": 79
+}
+ ```

@@ -7,16 +7,27 @@ const ZamowieniaSchema = new mongoose.Schema({
         ref: 'Klient'
     },
     produkt: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'produkt',
         required: true
     },
     status: {
         type: String,
+        enum: ["zlozone", "wRealizacji", "zrealizowane"],
         required: true
     },
     kwota: {
         type: Number,
         required: true
+    },
+    dataZamowienia: {
+        type: Date,
+        default: Date.now()
+    },
+    uzytkownik:{
+        required: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Uzytkownik'
     }
 })
 
