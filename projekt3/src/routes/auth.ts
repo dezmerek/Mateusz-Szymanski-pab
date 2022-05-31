@@ -4,6 +4,7 @@ import express from 'express';
 import bcrypt from 'bcrypt';
 import { jestAdmin } from "./tokenVerify";
 
+//validacja
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 dotenv.config("./.env");
@@ -14,7 +15,7 @@ const app = express()
 
 app.use(express.json())
 
-
+//login
 router.post('/login',async (req:Request, res:Response) => {
     try{
         const {login, haslo} = req.body;
@@ -22,13 +23,16 @@ router.post('/login',async (req:Request, res:Response) => {
         if(!login || !haslo)
             return res.status(400).json("Puste wartości.")
 
+        //sprawdzenie, czy login istnieje
         const existsUser = await UzytkownikModel.findOne({login}).lean()
 
         if(!existsUser)
             return res.status(401).json("zły login lub hasło.")
 
+        //hasło jest poprawne
         if(await bcrypt.compare(haslo, existsUser.haslo)){
 
+            //utwórz i przypisz token
             const token = jwt.sign(
                 {
                     _id: existsUser.id,
@@ -48,16 +52,19 @@ router.post('/login',async (req:Request, res:Response) => {
 
 router.post('/register',async (req:Request, res:Response) => {
     try{
+        //zweryfikujmy dane, zanim będziemy użytkownikiem
         const {login, email, imie, nazwisko, numerTelefonu, haslo: passwordBody} = req.body;
 
         if(!login || !email || !numerTelefonu || !passwordBody)
            return res.status(400).json("Puste wartości.")
 
+        //sprawdzenie, czy użytkownik jest już w bazie danych
         const isUserExists = await UzytkownikModel.findOne({login})
 
         if(isUserExists)
            return res.status(401).json("Użytkownik istnieje.")
 
+        //haszowania haseł
         const haslo = await bcrypt.hash(passwordBody, 10)
 
         const nowyUzytkownik = await new UzytkownikModel({

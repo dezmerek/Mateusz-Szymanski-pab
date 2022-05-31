@@ -3,7 +3,7 @@ import {Request, Response} from 'express'
 import express from 'express';
 import { jestAdmin, isAuth } from "./tokenVerify";
 import UzytkownikModel from "../models/Uzytkownik";
-import UslugaModel from "../models/Produkt";
+import ProduktModel from "../models/Produkt";
 
 const jwt = require("jsonwebtoken");
 const router = express.Router();
@@ -23,14 +23,14 @@ router.post('/add', async (req:Request, res:Response) => {
         uzytkownik: wybranyUzytkownik,
     })
     try{
-        const wybranyPordukt = await UslugaModel.findOne(zamowienie.produkt)
+        const wybranyPordukt = await ProduktModel.findOne(zamowienie.produkt)
         console.log(wybranyPordukt.isAvailable)
 
         if(wybranyPordukt.isAvailable == false)
            return res.status(400).json("Ten produkt nie może być zamówiony")
         else{
-            console.log(zamowienie.usluga)
-            await UslugaModel.findOneAndUpdate(wybranyPordukt,
+            console.log(zamowienie.produkt)
+            await ProduktModel.findOneAndUpdate(wybranyPordukt,
             {
                 $set: {isAvailable: false}
             },
